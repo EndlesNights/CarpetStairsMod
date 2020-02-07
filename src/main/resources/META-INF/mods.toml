@@ -1,0 +1,17 @@
+modLoader="javafml" #mandatory
+loaderVersion="[30,)" #mandatory
+[[mods]] #mandatory
+modId="carpetstairsmod" #mandatory
+version="1.0" #mandatory
+displayName="Carpet Stairs Mod" #mandatory 
+displayURL="https://www.curseforge.com/minecraft/mc-mods/carpet-stairs-mod" #optional
+
+# A file name (in the root of the mod JAR) containing a logo for display
+logoFile="examplemod.png" #optional
+
+# A text field displayed in the mod UI
+authors="EndlesNights" #optional
+
+# The description text for the mod (multi line!) (#mandatory)
+description='''
+A mod that allows the crafting of wood floors from wood slab blocks, and allows the placement of floor blocks & capets that will conferm to the shape of stair blocks as well as on top of slabs.'''
