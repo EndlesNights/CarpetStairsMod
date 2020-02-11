@@ -5,13 +5,8 @@ import javax.annotation.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.IWaterLoggable;
 import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -25,10 +20,9 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 
-public class WoodFloorBlock extends Block implements IWaterLoggable
+public class WoodFloorBlock extends Block
 {
 	public static final EnumProperty<Half> HALF = BlockStateProperties.HALF;
-	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	   
 	protected static final VoxelShape SHAPE_FLOOR = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
 	protected static final VoxelShape SHAPE_SLAB = Block.makeCuboidShape(0.0D, -8.0D, 0.0D, 16.0D, 1.0D, 16.0D);
@@ -48,14 +42,14 @@ public class WoodFloorBlock extends Block implements IWaterLoggable
 	public WoodFloorBlock(WoodType woodtype, Properties properties)
 	{
 		super(properties);
-		this.setDefaultState(this.getDefaultState().with(HALF, Half.BOTTOM).with(WATERLOGGED, Boolean.FALSE));
+		this.setDefaultState(this.getDefaultState().with(HALF, Half.BOTTOM));
 		this.wood = woodtype;
 	}
 	
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		builder.add(HALF, WATERLOGGED);
+		builder.add(HALF);
 	}
 	
 	public WoodType getWoodType()
@@ -99,12 +93,12 @@ public class WoodFloorBlock extends Block implements IWaterLoggable
 	public BlockState getStateForPlacement(BlockItemUseContext context)
 	{
 		BlockPos blockpos = context.getPos();
-		IFluidState ifluidstate = context.getWorld().getFluidState(blockpos);
 		
-		if(context.getWorld().getBlockState(blockpos.down()).getBlock() instanceof SlabBlock)
+		if(context.getWorld().getBlockState(blockpos.down()).getBlock() instanceof SlabBlock
+				&& context.getWorld().getBlockState(blockpos.down()).get(SlabBlock.TYPE) == SlabType.BOTTOM)
 		{
-			return this.getDefaultState().with(HALF, Half.TOP).with(WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
+			return this.getDefaultState().with(HALF, Half.TOP);
 		}
-		return this.getDefaultState().with(HALF, Half.BOTTOM).with(WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
+		return this.getDefaultState().with(HALF, Half.BOTTOM);
 	}
 }

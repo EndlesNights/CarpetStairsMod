@@ -3,16 +3,13 @@ package com.endlesnights.carpetstairsmod.blocks;
 import java.util.stream.IntStream;
 
 import com.endlesnights.carpetstairsmod.ModBlocks;
-import com.endlesnights.carpetstairsmod.blocks.WoodFloorBlock.WoodType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.EnumProperty;
@@ -34,7 +31,6 @@ public class WoodFloorStair extends WoodFloorBlock
 {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	public static final EnumProperty<StairsShape> SHAPE = BlockStateProperties.STAIRS_SHAPE;
-	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	   
 	public static final BooleanProperty CONDITIONAL = BlockStateProperties.CONDITIONAL;
 	
@@ -68,7 +64,7 @@ public class WoodFloorStair extends WoodFloorBlock
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		builder.add(FACING, SHAPE, CONDITIONAL, WATERLOGGED, HALF);
+		builder.add(FACING, SHAPE, CONDITIONAL, HALF);
 	}
 	
 	@Override
