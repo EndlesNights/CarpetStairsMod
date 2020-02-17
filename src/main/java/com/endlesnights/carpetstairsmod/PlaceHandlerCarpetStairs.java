@@ -7,15 +7,12 @@ import com.endlesnights.carpetstairsmod.blocks.BlockCarpetStair;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.IWaterLoggable;
-import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.Half;
-import net.minecraft.state.properties.SlabType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -51,6 +48,9 @@ private static final HashMap<ResourceLocation,Block> PLACE_ENTRIES = new HashMap
 				&& world.getBlockState(pos).getBlock() instanceof StairsBlock && world.getBlockState(pos).get(StairsBlock.HALF) == Half.BOTTOM
 				&& (world.isAirBlock(placeAt) || world.getFluidState(placeAt).getFluid() == Fluids.WATER || world.getFluidState(placeAt).getFluid() == Fluids.FLOWING_WATER))
 		{
+			if(world.getBlockState(pos).get(BlockStateProperties.WATERLOGGED))
+				world.setBlockState(pos, world.getBlockState(pos).with(BlockStateProperties.WATERLOGGED, false));
+			
 			world.setBlockState(placeAt, block.getDefaultState()  
 					.with(StairsBlock.FACING, world.getBlockState(pos).get(StairsBlock.FACING))
 					.with(StairsBlock.SHAPE, world.getBlockState(pos).get(StairsBlock.SHAPE)));

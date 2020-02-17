@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CarpetBlock;
 import net.minecraft.block.HorizontalBlock;
+import net.minecraft.block.IWaterLoggable;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.DyeColor;
@@ -49,7 +50,7 @@ public class BlockCarpetStair extends CarpetBlock
 	
 	protected static final VoxelShape[] SLAB_TOP_SHAPES = makeShapes(TOP_SHAPE, NWD_CORNER, NED_CORNER, SWD_CORNER, SED_CORNER);
 	protected static final VoxelShape[] SLAB_BOTTOM_SHAPES = makeShapes(BOTTOM_SHAPE, NWU_CORNER, NEU_CORNER, SWU_CORNER, SEU_CORNER);
-	
+
 	private static final int[] field_196522_K = new int[]{12, 5, 3, 10, 14, 13, 7, 11, 13, 7, 11, 14, 8, 4, 1, 2, 4, 1, 2, 8};
 	
 	private DyeColor dyeColor;
@@ -73,6 +74,12 @@ public class BlockCarpetStair extends CarpetBlock
 	@Override
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos)
 	{
+		if(worldIn.getBlockState(pos.down()) instanceof IWaterLoggable
+				&& worldIn.getBlockState(pos.down()).get(BlockStateProperties.WATERLOGGED))
+		{
+			return false;
+		}
+		
 		return worldIn.getBlockState(pos.down()).getBlock() instanceof StairsBlock;
 	}
 	
@@ -117,7 +124,7 @@ public class BlockCarpetStair extends CarpetBlock
 	@Override
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
 	{
-
+		
 		if(worldIn.getBlockState(currentPos.down()).getBlock() instanceof StairsBlock && worldIn.getBlockState(currentPos.down()).get(StairsBlock.HALF) == Half.BOTTOM)
 			return this.getDefaultState()  
 				.with(StairsBlock.FACING, worldIn.getBlockState(currentPos.down()).get(StairsBlock.FACING))

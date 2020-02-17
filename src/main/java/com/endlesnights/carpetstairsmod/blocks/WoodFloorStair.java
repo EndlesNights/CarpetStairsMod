@@ -9,6 +9,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
@@ -57,14 +58,15 @@ public class WoodFloorStair extends WoodFloorBlock
 		this.setDefaultState(this.stateContainer.getBaseState()
 				.with(FACING, Direction.NORTH)
 				.with(SHAPE, StairsShape.STRAIGHT)
-				.with(CONDITIONAL, false));
+				.with(CONDITIONAL, false)
+				.with(WATERLOGGED, false));
 		this.wood = woodtype;
 	}
 	
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		builder.add(FACING, SHAPE, CONDITIONAL, HALF);
+		builder.add(FACING, SHAPE, CONDITIONAL, HALF, WATERLOGGED);
 	}
 	
 	@Override
@@ -95,9 +97,12 @@ public class WoodFloorStair extends WoodFloorBlock
 	@Override
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
 	{
-
+		if (stateIn.get(WATERLOGGED)) {
+			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+		}
+		
 		if(worldIn.getBlockState(currentPos.down()).getBlock() instanceof StairsBlock && worldIn.getBlockState(currentPos.down()).get(StairsBlock.HALF) == Half.BOTTOM)
-			return this.getDefaultState()  
+			return stateIn  
 				.with(StairsBlock.FACING, worldIn.getBlockState(currentPos.down()).get(StairsBlock.FACING))
 				.with(StairsBlock.SHAPE, worldIn.getBlockState(currentPos.down()).get(StairsBlock.SHAPE))
 				.with(BlockCarpetStair.CONDITIONAL, stateIn.get(CONDITIONAL));

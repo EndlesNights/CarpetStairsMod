@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.SlabType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -51,6 +52,11 @@ public class CarpetSlab extends CarpetBlock
 	@Override
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos)
 	{
+
+		if(worldIn.getBlockState(pos.down()).get(BlockStateProperties.WATERLOGGED))
+		{
+			return false;
+		}
 		return worldIn.getBlockState(pos.down()).getBlock() instanceof SlabBlock
 				&& worldIn.getBlockState(pos.down()).get(SlabBlock.TYPE) == SlabType.BOTTOM;
 	}

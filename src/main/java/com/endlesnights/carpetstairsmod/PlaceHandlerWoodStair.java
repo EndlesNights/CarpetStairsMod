@@ -8,13 +8,11 @@ import com.endlesnights.carpetstairsmod.blocks.WoodFloorBlock.WoodType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.Half;
-import net.minecraft.state.properties.SlabType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -52,7 +50,8 @@ private static final HashMap<ResourceLocation,Block> PLACE_ENTRIES = new HashMap
 		{
 			world.setBlockState(placeAt, block.getDefaultState()  
 					.with(StairsBlock.FACING, world.getBlockState(pos).get(StairsBlock.FACING))
-					.with(StairsBlock.SHAPE, world.getBlockState(pos).get(StairsBlock.SHAPE)));
+					.with(StairsBlock.SHAPE, world.getBlockState(pos).get(StairsBlock.SHAPE))
+					.with(BlockStateProperties.WATERLOGGED, world.getFluidState(placeAt).getFluid() == Fluids.WATER));
 			
 			world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), block.getSoundType(world.getBlockState(pos)).getPlaceSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
 			event.getPlayer().swingArm(event.getHand());

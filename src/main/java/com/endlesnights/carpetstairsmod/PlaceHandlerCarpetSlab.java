@@ -4,15 +4,10 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.IWaterLoggable;
 import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.state.properties.Half;
 import net.minecraft.state.properties.SlabType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
@@ -48,9 +43,11 @@ private static final HashMap<ResourceLocation,Block> PLACE_ENTRIES = new HashMap
 		if(face == Direction.UP
 				&& world.getBlockState(pos).getBlock() instanceof SlabBlock
 				&& world.getBlockState(pos).get(SlabBlock.TYPE) == SlabType.BOTTOM 
-				&& (world.isAirBlock(placeAt) || world.getFluidState(placeAt).getFluid() == Fluids.WATER || world.getFluidState(placeAt).getFluid() == Fluids.FLOWING_WATER) )
+				&& (world.isAirBlock(placeAt) || world.getFluidState(placeAt).getFluid() == Fluids.WATER || world.getFluidState(placeAt).getFluid() == Fluids.FLOWING_WATER))
 		{	
-
+			if(world.getBlockState(pos).get(BlockStateProperties.WATERLOGGED))
+				world.setBlockState(pos, world.getBlockState(pos).with(BlockStateProperties.WATERLOGGED, false));
+			
 			world.setBlockState(placeAt, block.getDefaultState());
 
 			world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), block.getSoundType(world.getBlockState(pos)).getPlaceSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
