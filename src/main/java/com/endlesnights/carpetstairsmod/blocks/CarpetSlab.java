@@ -52,13 +52,9 @@ public class CarpetSlab extends CarpetBlock
 	@Override
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos)
 	{
-
-		if(worldIn.getBlockState(pos.down()).get(BlockStateProperties.WATERLOGGED))
-		{
-			return false;
-		}
 		return worldIn.getBlockState(pos.down()).getBlock() instanceof SlabBlock
-				&& worldIn.getBlockState(pos.down()).get(SlabBlock.TYPE) == SlabType.BOTTOM;
+				&& worldIn.getBlockState(pos.down()).get(SlabBlock.TYPE) == SlabType.BOTTOM
+				&& !(worldIn.getBlockState(pos.down()).get(BlockStateProperties.WATERLOGGED));
 	}
 		   
 			@Override
