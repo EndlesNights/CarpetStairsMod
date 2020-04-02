@@ -11,6 +11,7 @@ import net.minecraft.block.StairsBlock;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.Half;
 import net.minecraft.util.Direction;
@@ -63,7 +64,7 @@ private static final HashMap<ResourceLocation,Block> PLACE_ENTRIES = new HashMap
 			event.setCanceled(true);
 		}
 		else if((world.getBlockState(pos).getBlock() instanceof BlockCarpetStair && world.getBlockState(pos).get(BlockCarpetStair.CONDITIONAL) == false)
-				&& getDyeColorItem(held) == getDyeColorBlock(world.getBlockState(pos) ) && getDyeColorItem(held) != null)
+				&& match(held,world.getBlockState(pos) ))
 		{
 			world.setBlockState(pos, world.getBlockState(pos)
 					.with(BlockCarpetStair.CONDITIONAL, true));
@@ -78,7 +79,7 @@ private static final HashMap<ResourceLocation,Block> PLACE_ENTRIES = new HashMap
 		else if( face != Direction.DOWN
 				&& (world.getBlockState(pos).getBlock() instanceof StairsBlock && world.getBlockState(pos).get(StairsBlock.HALF) == Half.BOTTOM)
 				&& (world.getBlockState(pos.up()).getBlock() instanceof BlockCarpetStair && world.getBlockState(pos.up()).get(BlockCarpetStair.CONDITIONAL) == false)
-				&& getDyeColorItem(held) == getDyeColorBlock(world.getBlockState(pos.up()) ) && getDyeColorItem(held) != null)
+				&& match(held,world.getBlockState(pos.up()) ))
 		{
 			
 			world.setBlockState(pos.up(), world.getBlockState(pos.up())
@@ -93,88 +94,28 @@ private static final HashMap<ResourceLocation,Block> PLACE_ENTRIES = new HashMap
 		}
 	}
 
-	public static DyeColor getDyeColorItem(ItemStack item)
+	public static boolean match(ItemStack item, BlockState state)
 	{
-		switch(item.getDisplayName().getString())
-		{
-			case"Black Carpet":
-				return DyeColor.BLACK;
-			case"Blue Carpet":
-				return DyeColor.BLUE;
-			case"Brown Carpet":
-				return DyeColor.BROWN;
-			case"Cyan Carpet":
-				return DyeColor.CYAN;
-			case"Gray Carpet":
-				return DyeColor.GRAY;
-			case"Green Carpet":
-				return DyeColor.GREEN;	
-			case"Light Blue Carpet":
-				return DyeColor.LIGHT_BLUE;
-			case"Light Gray Carpet":
-				return DyeColor.LIGHT_GRAY;
-			case"Lime Carpet":
-				return DyeColor.LIME;
-			case"Magenta Carpet":
-				return DyeColor.MAGENTA;
-			case"Orange Carpet":
-				return DyeColor.ORANGE;
-			case"Pink Carpet":
-				return DyeColor.PINK;
-			case"Purple Carpet":
-				return DyeColor.PURPLE;
-			case"Red Carpet":
-				return DyeColor.RED;
-			case"White Carpet":
-				return DyeColor.WHITE;
-			case"Yellow Carpet":
-				return DyeColor.YELLOW;
-		}
+		if(	(item.getItem() == Items.BLACK_CARPET && state.getBlock() == ModBlocks.black_carpet_stair)||
+			(item.getItem() == Items.BLUE_CARPET && state.getBlock() == ModBlocks.blue_carpet_stair)||
+			(item.getItem() == Items.BROWN_CARPET && state.getBlock() == ModBlocks.brown_carpet_stair)||
+			(item.getItem() == Items.CYAN_CARPET && state.getBlock() == ModBlocks.cyan_carpet_stair)||
+			(item.getItem() == Items.GRAY_CARPET && state.getBlock() == ModBlocks.gray_carpet_stair)||
+			(item.getItem() == Items.GREEN_CARPET && state.getBlock() == ModBlocks.green_carpet_stair)||
+			(item.getItem() == Items.LIGHT_BLUE_CARPET && state.getBlock() == ModBlocks.light_blue_carpet_stair)||
+			(item.getItem() == Items.LIGHT_GRAY_CARPET && state.getBlock() == ModBlocks.light_gray_carpet_stair)||
+			(item.getItem() == Items.LIME_CARPET && state.getBlock() == ModBlocks.lime_carpet_stair)||
+			(item.getItem() == Items.ORANGE_CARPET && state.getBlock() == ModBlocks.orange_carpet_stair)||
+			(item.getItem() == Items.PINK_CARPET && state.getBlock() == ModBlocks.pink_carpet_stair)||
+			(item.getItem() == Items.PURPLE_CARPET && state.getBlock() == ModBlocks.purple_carpet_stair)||
+			(item.getItem() == Items.RED_CARPET && state.getBlock() == ModBlocks.red_carpet_stair)||
+			(item.getItem() == Items.WHITE_CARPET && state.getBlock() == ModBlocks.white_carpet_stair)||
+			(item.getItem() == Items.YELLOW_CARPET && state.getBlock() == ModBlocks.yellow_carpet_stair)
+				)
+			return true;
 		
-		return null;
+		return false;
 	}
-	
-	public static DyeColor getDyeColorBlock(BlockState state)
-	{
-		switch(state.getBlock().getNameTextComponent().getString())
-		{				
-			case"Black Carpet Stair":
-				return DyeColor.BLACK;
-			case"Blue Carpet Stair":
-				return DyeColor.BLUE;
-			case"Brown Carpet Stair":
-				return DyeColor.BROWN;
-			case"Cyan Carpet Stair":
-				return DyeColor.CYAN;
-			case"Gray Carpet Stair":
-				return DyeColor.GRAY;
-			case"Green Carpet Stair":
-				return DyeColor.GREEN;	
-			case"Light Blue Carpet Stair":
-				return DyeColor.LIGHT_BLUE;
-			case"Light Gray Carpet Stair":
-				return DyeColor.LIGHT_GRAY;
-			case"Lime Carpet Stair":
-				return DyeColor.LIME;
-			case"Magenta Carpet Stair":
-				return DyeColor.MAGENTA;
-			case"Orange Carpet Stair":
-				return DyeColor.ORANGE;
-			case"Pink Carpet Stair":
-				return DyeColor.PINK;
-			case"Purple Carpet Stair":
-				return DyeColor.PURPLE;
-			case"Red Carpet Stair":
-				return DyeColor.RED;
-			case"White Carpet Stair":
-				return DyeColor.WHITE;
-			case"Yellow Carpet Stair":
-				return DyeColor.YELLOW;
-		}
-		
-		return null;
-	}
-
 	
 	public static void registerPlaceEntry(ResourceLocation itemName, Block torchSlab)
 	{

@@ -31,6 +31,9 @@ import net.minecraft.world.IWorldReader;
 
 public class BlockCarpetStair extends CarpetBlock 
 {
+	public static final BooleanProperty RIGHT = BooleanProperty.create("right");
+	public static final BooleanProperty LEFT = BooleanProperty.create("left");
+	
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	public static final EnumProperty<StairsShape> SHAPE = BlockStateProperties.STAIRS_SHAPE;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -57,18 +60,20 @@ public class BlockCarpetStair extends CarpetBlock
 	
 	public BlockCarpetStair(DyeColor color, Block.Properties properties)
 	{
-		super(color, properties);
+		super(color, properties.notSolid());
 		this.setDefaultState(this.stateContainer.getBaseState()
 				.with(FACING, Direction.NORTH)
 				.with(SHAPE, StairsShape.STRAIGHT)
-				.with(CONDITIONAL, false));
+				.with(CONDITIONAL, false)
+				.with(RIGHT, false)
+				.with(LEFT, false));
 		this.dyeColor = color;
 	}
 	
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		builder.add(FACING, SHAPE, CONDITIONAL);
+		builder.add(FACING, SHAPE, CONDITIONAL, RIGHT, LEFT);
 	}
 	
 	@Override
@@ -121,15 +126,53 @@ public class BlockCarpetStair extends CarpetBlock
 		return new ItemStack(null);
 	}
 	
+	public boolean checkLeft(BlockState stateIn, BlockPos currentPos, IWorld worldIn)
+	{
+		if(stateIn.get(SHAPE) == StairsShape.STRAIGHT)
+		{
+			if(stateIn.get(FACING) == Direction.NORTH)
+				return worldIn.getBlockState(currentPos.west()).getBlock() instanceof BlockCarpetStair;
+			else if(stateIn.get(FACING) == Direction.EAST)
+				return worldIn.getBlockState(currentPos.north()).getBlock() instanceof BlockCarpetStair;
+			else if(stateIn.get(FACING) == Direction.SOUTH)
+				return worldIn.getBlockState(currentPos.east()).getBlock() instanceof BlockCarpetStair;
+			else if(stateIn.get(FACING) == Direction.WEST)
+				return worldIn.getBlockState(currentPos.south()).getBlock() instanceof BlockCarpetStair;
+		}
+		return false;
+	}
+	
+	public boolean checkRight(BlockState stateIn, BlockPos currentPos, IWorld worldIn)
+	{
+		if(stateIn.get(SHAPE) == StairsShape.STRAIGHT)
+		{
+			if(stateIn.get(FACING) == Direction.NORTH)
+				return worldIn.getBlockState(currentPos.east()).getBlock() instanceof BlockCarpetStair;
+			else if(stateIn.get(FACING) == Direction.EAST)
+				return worldIn.getBlockState(currentPos.south()).getBlock() instanceof BlockCarpetStair;
+			else if(stateIn.get(FACING) == Direction.SOUTH)
+				return worldIn.getBlockState(currentPos.west()).getBlock() instanceof BlockCarpetStair;
+			else if(stateIn.get(FACING) == Direction.WEST)
+				return worldIn.getBlockState(currentPos.north()).getBlock() instanceof BlockCarpetStair;
+		}
+		return false;
+	}
+	
 	@Override
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
 	{
-		
+			
 		if(worldIn.getBlockState(currentPos.down()).getBlock() instanceof StairsBlock && worldIn.getBlockState(currentPos.down()).get(StairsBlock.HALF) == Half.BOTTOM)
-			return this.getDefaultState()  
-				.with(StairsBlock.FACING, worldIn.getBlockState(currentPos.down()).get(StairsBlock.FACING))
-				.with(StairsBlock.SHAPE, worldIn.getBlockState(currentPos.down()).get(StairsBlock.SHAPE))
-				.with(BlockCarpetStair.CONDITIONAL, stateIn.get(CONDITIONAL));
+		{
+			return this.getDefaultState()
+					.with(StairsBlock.FACING, worldIn.getBlockState(currentPos.down()).get(StairsBlock.FACING))
+					.with(StairsBlock.SHAPE, worldIn.getBlockState(currentPos.down()).get(StairsBlock.SHAPE))
+					.with(CONDITIONAL, stateIn.get(CONDITIONAL))
+					.with(RIGHT, checkRight(stateIn, currentPos, worldIn))
+					.with(LEFT, checkLeft(stateIn, currentPos, worldIn))
+						;
+		}
+
 		
 		return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
