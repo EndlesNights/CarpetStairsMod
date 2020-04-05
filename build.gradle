@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.4.1'
+version = '1.4.2'
 group = 'com.endlesnights.carpetstairsmod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'carpetstairsmod'
 
@@ -117,7 +117,7 @@ jar {
         attributes([
             "Specification-Title": "carpetstairsmod",
             "Specification-Vendor": "EndlesNights",
-            "Specification-Version": "1.4.1", // We are version 1 of ourselves
+            "Specification-Version": "1.4.2", // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
             "Implementation-Vendor" :"EndlesNights",

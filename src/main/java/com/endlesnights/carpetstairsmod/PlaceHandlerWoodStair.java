@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import com.endlesnights.carpetstairsmod.blocks.WoodFloorStair;
-import com.endlesnights.carpetstairsmod.blocks.WoodFloorBlock.WoodType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -61,7 +60,7 @@ private static final HashMap<ResourceLocation,Block> PLACE_ENTRIES = new HashMap
 			event.setCanceled(true);
 		}
 		else if((world.getBlockState(pos).getBlock() instanceof WoodFloorStair && world.getBlockState(pos).get(WoodFloorStair.CONDITIONAL) == false)
-				&& getWoodTypeItem(held) == getWoodTypeBlock(world.getBlockState(pos) ) && getWoodTypeItem(held) != null)
+				&& match(held,world.getBlockState(pos)))
 		{
 			world.setBlockState(pos, world.getBlockState(pos)
 					.with(WoodFloorStair.CONDITIONAL, true));
@@ -76,7 +75,7 @@ private static final HashMap<ResourceLocation,Block> PLACE_ENTRIES = new HashMap
 		else if( face != Direction.DOWN
 				&& (world.getBlockState(pos).getBlock() instanceof StairsBlock && world.getBlockState(pos).get(StairsBlock.HALF) == Half.BOTTOM)
 				&& (world.getBlockState(pos.up()).getBlock() instanceof WoodFloorStair && world.getBlockState(pos.up()).get(WoodFloorStair.CONDITIONAL) == false)
-				&& getWoodTypeItem(held) == getWoodTypeBlock(world.getBlockState(pos.up()) ) && getWoodTypeItem(held) != null)
+				&& match(held,world.getBlockState(pos.up())))
 		{
 			
 			world.setBlockState(pos.up(), world.getBlockState(pos.up())
@@ -91,49 +90,20 @@ private static final HashMap<ResourceLocation,Block> PLACE_ENTRIES = new HashMap
 		}
 
 	}
-
-	public static WoodType getWoodTypeItem(ItemStack item)
-	{
-		switch(item.getDisplayName().getString())
-		{
-			case"Acacia Flooring":
-				return WoodType.ACACIA;
-			case"Birch Flooring":
-				return WoodType.BIRCH;
-			case"Dark Oak Flooring":
-				return WoodType.DARK_OAK;
-			case"Jungle Flooring":
-				return WoodType.JUNGLE;
-			case"Oak Flooring":
-				return WoodType.OAK;
-			case"Spruce Flooring":
-				return WoodType.SPRUCE;	
-		}
-		
-		return null;
-	}
 	
-	public static WoodType getWoodTypeBlock(BlockState state)
+	public static boolean match(ItemStack item, BlockState state)
 	{
-		switch(state.getBlock().getNameTextComponent().getString())
-		{				
-		case"Acacia Flooring Stair":
-			return WoodType.ACACIA;
-		case"Birch Flooring Stair":
-			return WoodType.BIRCH;
-		case"Dark Oak Flooring Stair":
-			return WoodType.DARK_OAK;
-		case"Jungle Flooring Stair":
-			return WoodType.JUNGLE;
-		case"Oak Flooring Stair":
-			return WoodType.OAK;
-		case"Spruce Flooring Stair":
-			return WoodType.SPRUCE;	
-		}
+		if(	(item.getItem() == ModBlocks.acacia_wood_floor.asItem() && state.getBlock() == ModBlocks.acacia_wood_floor_stair) ||
+			(item.getItem() == ModBlocks.birch_wood_floor.asItem() && state.getBlock() == ModBlocks.birch_wood_floor_stair) ||
+			(item.getItem() == ModBlocks.dark_oak_wood_floor.asItem() && state.getBlock() == ModBlocks.dark_oak_wood_floor_stair) ||
+			(item.getItem() == ModBlocks.jungle_wood_floor.asItem() && state.getBlock() == ModBlocks.jungle_wood_floor_stair) ||
+			(item.getItem() == ModBlocks.oak_wood_floor.asItem() && state.getBlock() == ModBlocks.oak_wood_floor_stair) ||
+			(item.getItem() == ModBlocks.spruce_wood_floor.asItem() && state.getBlock() == ModBlocks.spruce_wood_floor_stair) 
+				)
+				return true;
 		
-		return null;
+		return false;
 	}
-
 	
 	public static void registerPlaceEntry(ResourceLocation itemName, Block torchSlab)
 	{

@@ -31,38 +31,20 @@ public class WoodFloorBlock extends Block implements IWaterLoggable
 	public static final EnumProperty<Half> HALF = BlockStateProperties.HALF;
 	   
 	protected static final VoxelShape SHAPE_FLOOR = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
-	protected static final VoxelShape SHAPE_SLAB = Block.makeCuboidShape(0.0D, -8.0D, 0.0D, 16.0D, 1.0D, 16.0D);
+	protected static final VoxelShape SHAPE_SLAB = Block.makeCuboidShape(0.0D, -8.0D, 0.0D, 16.0D, 1.0D, 16.0D);	
 	
-	public enum WoodType
-	{
-		ACACIA(),
-		BIRCH(),
-		JUNGLE(),
-		SPRUCE(),
-		OAK(),
-		DARK_OAK();
-	}
-	
-	private final WoodType wood;
-	
-	public WoodFloorBlock(WoodType woodtype, Properties properties)
+	public WoodFloorBlock(Properties properties)
 	{
 		super(properties);
 		this.setDefaultState(this.getDefaultState()
 				.with(HALF, Half.BOTTOM)
 				.with(WATERLOGGED, Boolean.valueOf(false)));
-		this.wood = woodtype;
 	}
 	
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
 		builder.add(HALF,WATERLOGGED);
-	}
-	
-	public WoodType getWoodType()
-	{
-		return this.wood;
 	}
 	
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)

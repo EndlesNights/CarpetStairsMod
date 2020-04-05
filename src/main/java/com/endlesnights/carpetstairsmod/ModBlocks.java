@@ -102,19 +102,19 @@ public class ModBlocks implements ICarpetStairsCompat
 		white_carpet_slab = registerBlock(new CarpetSlab(DyeColor.WHITE , Block.Properties.from(Blocks.WHITE_CARPET).lootFrom(Blocks.WHITE_CARPET)), "white_carpet_slab");
 		yellow_carpet_slab = registerBlock(new CarpetSlab(DyeColor.YELLOW, Block.Properties.from(Blocks.YELLOW_CARPET).lootFrom(Blocks.YELLOW_CARPET)), "yellow_carpet_slab");
 
-		acacia_wood_floor = registerBlock(new WoodFloorBlock(WoodFloorBlock.WoodType.ACACIA, Block.Properties.from(Blocks.ACACIA_SLAB)), "acacia_wood_floor");
-		birch_wood_floor = registerBlock(new WoodFloorBlock(WoodFloorBlock.WoodType.BIRCH, Block.Properties.from(Blocks.BIRCH_SLAB)), "birch_wood_floor");
-		jungle_wood_floor = registerBlock(new WoodFloorBlock(WoodFloorBlock.WoodType.JUNGLE, Block.Properties.from(Blocks.JUNGLE_SLAB)), "jungle_wood_floor");
-		spruce_wood_floor = registerBlock(new WoodFloorBlock(WoodFloorBlock.WoodType.SPRUCE, Block.Properties.from(Blocks.SPRUCE_SLAB)), "spruce_wood_floor");
-		oak_wood_floor = registerBlock(new WoodFloorBlock(WoodFloorBlock.WoodType.OAK, Block.Properties.from(Blocks.OAK_SLAB)), "oak_wood_floor");
-		dark_oak_wood_floor = registerBlock(new WoodFloorBlock(WoodFloorBlock.WoodType.DARK_OAK, Block.Properties.from(Blocks.DARK_OAK_SLAB)), "dark_oak_wood_floor");
+		acacia_wood_floor = registerBlock(new WoodFloorBlock(Block.Properties.from(Blocks.ACACIA_SLAB)), "acacia_wood_floor");
+		birch_wood_floor = registerBlock(new WoodFloorBlock(Block.Properties.from(Blocks.BIRCH_SLAB)), "birch_wood_floor");
+		jungle_wood_floor = registerBlock(new WoodFloorBlock(Block.Properties.from(Blocks.JUNGLE_SLAB)), "jungle_wood_floor");
+		spruce_wood_floor = registerBlock(new WoodFloorBlock(Block.Properties.from(Blocks.SPRUCE_SLAB)), "spruce_wood_floor");
+		oak_wood_floor = registerBlock(new WoodFloorBlock(Block.Properties.from(Blocks.OAK_SLAB)), "oak_wood_floor");
+		dark_oak_wood_floor = registerBlock(new WoodFloorBlock(Block.Properties.from(Blocks.DARK_OAK_SLAB)), "dark_oak_wood_floor");
 		
-		acacia_wood_floor_stair = registerBlock(new WoodFloorStair(WoodFloorBlock.WoodType.ACACIA, Block.Properties.from(Blocks.ACACIA_SLAB)), "acacia_wood_floor_stair");
-		birch_wood_floor_stair = registerBlock(new WoodFloorStair(WoodFloorBlock.WoodType.BIRCH, Block.Properties.from(Blocks.BIRCH_SLAB)), "birch_wood_floor_stair");
-		jungle_wood_floor_stair = registerBlock(new WoodFloorStair(WoodFloorBlock.WoodType.JUNGLE, Block.Properties.from(Blocks.JUNGLE_SLAB)), "jungle_wood_floor_stair");
-		spruce_wood_floor_stair = registerBlock(new WoodFloorStair(WoodFloorBlock.WoodType.SPRUCE, Block.Properties.from(Blocks.SPRUCE_SLAB)), "spruce_wood_floor_stair");
-		oak_wood_floor_stair = registerBlock(new WoodFloorStair(WoodFloorBlock.WoodType.OAK, Block.Properties.from(Blocks.OAK_SLAB)), "oak_wood_floor_stair");
-		dark_oak_wood_floor_stair = registerBlock(new WoodFloorStair(WoodFloorBlock.WoodType.DARK_OAK, Block.Properties.from(Blocks.DARK_OAK_SLAB)), "dark_oak_wood_floor_stair");
+		acacia_wood_floor_stair = registerBlock(new WoodFloorStair(acacia_wood_floor, Block.Properties.from(Blocks.ACACIA_SLAB)), "acacia_wood_floor_stair");
+		birch_wood_floor_stair = registerBlock(new WoodFloorStair(birch_wood_floor, Block.Properties.from(Blocks.BIRCH_SLAB)), "birch_wood_floor_stair");
+		jungle_wood_floor_stair = registerBlock(new WoodFloorStair(jungle_wood_floor, Block.Properties.from(Blocks.JUNGLE_SLAB)), "jungle_wood_floor_stair");
+		spruce_wood_floor_stair = registerBlock(new WoodFloorStair(spruce_wood_floor, Block.Properties.from(Blocks.SPRUCE_SLAB)), "spruce_wood_floor_stair");
+		oak_wood_floor_stair = registerBlock(new WoodFloorStair(oak_wood_floor, Block.Properties.from(Blocks.OAK_SLAB)), "oak_wood_floor_stair");
+		dark_oak_wood_floor_stair = registerBlock(new WoodFloorStair(dark_oak_wood_floor, Block.Properties.from(Blocks.DARK_OAK_SLAB)), "dark_oak_wood_floor_stair");
 	}
 
 	@Override

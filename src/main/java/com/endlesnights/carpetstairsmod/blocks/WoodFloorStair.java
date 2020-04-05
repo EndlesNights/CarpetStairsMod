@@ -50,17 +50,17 @@ public class WoodFloorStair extends WoodFloorBlock
 	protected static final VoxelShape[] SLAB_BOTTOM_SHAPES = makeShapes(BOTTOM_SHAPE, NWU_CORNER, NEU_CORNER, SWU_CORNER, SEU_CORNER);
 	
 	private static final int[] field_196522_K = new int[]{12, 5, 3, 10, 14, 13, 7, 11, 13, 7, 11, 14, 8, 4, 1, 2, 4, 1, 2, 8};
-	private final WoodType wood;
+	private final Block parentBlock;
 	
-	public WoodFloorStair(WoodType woodtype, Properties properties)
+	public WoodFloorStair(Block parentBlock, Properties properties)
 	{
-		super(woodtype, properties);
+		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState()
 				.with(FACING, Direction.NORTH)
 				.with(SHAPE, StairsShape.STRAIGHT)
 				.with(CONDITIONAL, false)
 				.with(WATERLOGGED, false));
-		this.wood = woodtype;
+		this.parentBlock = parentBlock;
 	}
 	
 	@Override
@@ -78,20 +78,7 @@ public class WoodFloorStair extends WoodFloorBlock
 	@Override
 	public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player)
 	{
-		if(this.wood == WoodType.ACACIA)
-			return new ItemStack( ModBlocks.acacia_wood_floor.asItem());
-		if(this.wood == WoodType.BIRCH)
-			return new ItemStack( ModBlocks.birch_wood_floor.asItem());
-		if(this.wood == WoodType.DARK_OAK)
-			return new ItemStack( ModBlocks.dark_oak_wood_floor.asItem());
-		if(this.wood == WoodType.JUNGLE)
-			return new ItemStack( ModBlocks.jungle_wood_floor.asItem());
-		if(this.wood == WoodType.OAK)
-			return new ItemStack( ModBlocks.oak_wood_floor.asItem());
-		if(this.wood == WoodType.SPRUCE)
-			return new ItemStack( ModBlocks.spruce_wood_floor.asItem());
-		
-		return null;
+		return new ItemStack( parentBlock.asItem());
 	}
 	
 	@Override
