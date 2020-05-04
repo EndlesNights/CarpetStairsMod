@@ -5,6 +5,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ObjectHolder;
 
@@ -18,14 +19,24 @@ public class ModItems
     	
         event.getRegistry().registerAll
         (
-        		createItemBlockForBlock(ModBlocks.acacia_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab)),
-        		createItemBlockForBlock(ModBlocks.birch_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab)),
-        		createItemBlockForBlock(ModBlocks.jungle_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab)),
-        		createItemBlockForBlock(ModBlocks.spruce_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab)),
-        		createItemBlockForBlock(ModBlocks.oak_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab)),
-        		createItemBlockForBlock(ModBlocks.dark_oak_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab))
+    		createItemBlockForBlock(ModBlocks.acacia_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab)),
+    		createItemBlockForBlock(ModBlocks.birch_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab)),
+    		createItemBlockForBlock(ModBlocks.jungle_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab)),
+    		createItemBlockForBlock(ModBlocks.spruce_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab)),
+    		createItemBlockForBlock(ModBlocks.oak_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab)),
+    		createItemBlockForBlock(ModBlocks.dark_oak_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab))
 
         );
+        
+		if(ModList.get().isLoaded("extendedmushrooms"))
+		{
+	        event.getRegistry().registerAll
+	        (
+        		createItemBlockForBlock(ExtendedMushroomsCompat.glowshroom_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab)),
+        		createItemBlockForBlock(ExtendedMushroomsCompat.mushroom_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab)),
+        		createItemBlockForBlock(ExtendedMushroomsCompat.poisonous_mushroom_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab))
+			);
+		}
     }
     
     private static BlockItem createItemBlockForBlock (Block block, Item.Properties properties)

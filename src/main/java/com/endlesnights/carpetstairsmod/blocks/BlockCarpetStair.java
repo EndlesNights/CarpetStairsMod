@@ -11,7 +11,6 @@ import net.minecraft.block.StairsBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.EnumProperty;
@@ -55,10 +54,9 @@ public class BlockCarpetStair extends CarpetBlock
 	protected static final VoxelShape[] SLAB_BOTTOM_SHAPES = makeShapes(BOTTOM_SHAPE, NWU_CORNER, NEU_CORNER, SWU_CORNER, SEU_CORNER);
 
 	private static final int[] field_196522_K = new int[]{12, 5, 3, 10, 14, 13, 7, 11, 13, 7, 11, 14, 8, 4, 1, 2, 4, 1, 2, 8};
+	Block parentBlock;
 	
-	private DyeColor dyeColor;
-	
-	public BlockCarpetStair(DyeColor color, Block.Properties properties)
+	public BlockCarpetStair(Block parentBlock, DyeColor color, Block.Properties properties)
 	{
 		super(color, properties.notSolid());
 		this.setDefaultState(this.stateContainer.getBaseState()
@@ -67,7 +65,7 @@ public class BlockCarpetStair extends CarpetBlock
 				.with(CONDITIONAL, false)
 				.with(RIGHT, false)
 				.with(LEFT, false));
-		this.dyeColor = color;
+		this.parentBlock = parentBlock;
 	}
 	
 	@Override
@@ -91,39 +89,7 @@ public class BlockCarpetStair extends CarpetBlock
 	@Override
 	public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player)
 	{
-		if(this.dyeColor == DyeColor.BLACK)
-			return new ItemStack( Items.BLACK_CARPET);
-		if(this.dyeColor == DyeColor.BLUE)
-			return new ItemStack( Items.BLUE_CARPET);
-		if(this.dyeColor == DyeColor.BROWN)
-			return new ItemStack( Items.BROWN_CARPET);
-		if(this.dyeColor == DyeColor.CYAN)
-			return new ItemStack( Items.CYAN_CARPET);
-		if(this.dyeColor == DyeColor.GRAY)
-			return new ItemStack( Items.GRAY_CARPET);
-		if(this.dyeColor == DyeColor.GREEN)
-			return new ItemStack( Items.GREEN_CARPET);
-		if(this.dyeColor == DyeColor.LIGHT_GRAY)
-			return new ItemStack( Items.LIGHT_GRAY_CARPET);
-		if(this.dyeColor == DyeColor.LIGHT_BLUE)
-			return new ItemStack( Items.LIGHT_BLUE_CARPET);
-		if(this.dyeColor == DyeColor.LIME)
-			return new ItemStack( Items.LIME_CARPET);
-		if(this.dyeColor == DyeColor.MAGENTA)
-			return new ItemStack( Items.MAGENTA_CARPET);
-		if(this.dyeColor == DyeColor.ORANGE)
-			return new ItemStack( Items.ORANGE_CARPET);
-		if(this.dyeColor == DyeColor.PINK)
-			return new ItemStack( Items.PINK_CARPET);
-		if(this.dyeColor == DyeColor.PURPLE)
-			return new ItemStack( Items.PURPLE_CARPET);
-		if(this.dyeColor == DyeColor.RED)
-			return new ItemStack( Items.RED_CARPET);
-		if(this.dyeColor == DyeColor.WHITE)
-			return new ItemStack( Items.WHITE_CARPET);
-		if(this.dyeColor == DyeColor.YELLOW)
-			return new ItemStack( Items.YELLOW_CARPET);
-		return new ItemStack(null);
+		return new ItemStack(parentBlock.asItem());
 	}
 	
 	public boolean checkLeft(BlockState stateIn, BlockPos currentPos, IWorld worldIn)

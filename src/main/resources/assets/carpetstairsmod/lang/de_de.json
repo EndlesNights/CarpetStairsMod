@@ -47,5 +47,9 @@
 	"block.carpetstairsmod.oak_wood_floor_stair": "Eichenbodentreppe",
 	"block.carpetstairsmod.dark_oak_wood_floor_stair": "Schwarzeichenbodentreppe",
 	
+	"block.carpetstairsmod.mushroom_wood_floor": "Pilzboden",
+	"block.carpetstairsmod.glowshroom_wood_floor": "Leuchtpilzboden",
+	"block.carpetstairsmod.poisonous_mushroom_wood_floor": "Giftpilzboden",
+	
 	"itemGroup.carpetstairsmod": "Holzboden"
 }

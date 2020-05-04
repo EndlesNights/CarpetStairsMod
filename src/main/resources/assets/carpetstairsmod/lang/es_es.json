@@ -46,6 +46,10 @@
 	"block.carpetstairsmod.spruce_wood_floor_stair": "Escaleras con parquet de abeto",
 	"block.carpetstairsmod.oak_wood_floor_stair": "Escaleras con parquet de roble",
 	"block.carpetstairsmod.dark_oak_wood_floor_stair": "Escaleras con parquet de roble oscuro",
+
+	"block.carpetstairsmod.mushroom_wood_floor": "Parquet de seta",
+	"block.carpetstairsmod.glowshroom_wood_floor": "Parquet de seta brillante",
+	"block.carpetstairsmod.poisonous_mushroom_wood_floor": "Parquet de seta venenosa",
 	
 	"itemGroup.carpetstairsmod": "Parquets y moquetas"
 }

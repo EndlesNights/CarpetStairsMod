@@ -2,7 +2,7 @@ modLoader="javafml" #mandatory
 loaderVersion="[31,)" #mandatory
 [[mods]] #mandatory
 modId="carpetstairsmod" #mandatory
-version="1.4.2.0" #mandatory
+version="1.4.3" #mandatory
 displayName="Carpet Stairs Mod" #mandatory 
 displayURL="https://www.curseforge.com/minecraft/mc-mods/carpet-stairs-mod" #optional
 

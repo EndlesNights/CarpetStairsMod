@@ -47,5 +47,9 @@
 	"block.carpetstairsmod.oak_wood_floor_stair": "Oak Flooring Stair",
 	"block.carpetstairsmod.dark_oak_wood_floor_stair": "Dark Oak Flooring Stair",
 	
+	"block.carpetstairsmod.mushroom_wood_floor": "Mushroom Flooring",
+	"block.carpetstairsmod.glowshroom_wood_floor": "Glowshroom Flooring",
+	"block.carpetstairsmod.poisonous_mushroom_wood_floor": "Piosonous Mushroom Flooring",
+	
 	"itemGroup.carpetstairsmod": "Wood Flooring"
 }

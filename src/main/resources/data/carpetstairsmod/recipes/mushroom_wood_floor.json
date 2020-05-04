@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "extendedmushrooms:mushroom_slab"
+    }
+  },
+  "result": {
+    "item": "carpetstairsmod:mushroom_wood_floor",
+    "count": 9
+  }
+}

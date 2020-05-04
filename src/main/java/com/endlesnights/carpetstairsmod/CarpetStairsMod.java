@@ -9,6 +9,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -30,6 +31,12 @@ public class CarpetStairsMod
 		instance = this;
 		creativeTab = new CreativeTab();
 		compatList.add(ModBlocks::new);
+		
+		if(ModList.get().isLoaded("extendedmushrooms"))
+		{
+			System.out.println("EXTENDED MUSHROOMS Blocks DETECTED AND LOADED carpetstairsmod COMPAT");
+			compatList.add(ExtendedMushroomsCompat::new);
+		}
 
 	}
 

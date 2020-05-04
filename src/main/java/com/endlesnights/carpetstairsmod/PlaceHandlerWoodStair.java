@@ -19,6 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber(modid=CarpetStairsMod.MODID)
@@ -101,6 +102,14 @@ private static final HashMap<ResourceLocation,Block> PLACE_ENTRIES = new HashMap
 			(item.getItem() == ModBlocks.spruce_wood_floor.asItem() && state.getBlock() == ModBlocks.spruce_wood_floor_stair) 
 				)
 				return true;
+		
+		if(ModList.get().isLoaded("extendedmushrooms"))
+		{
+			if(	(item.getItem() == ExtendedMushroomsCompat.glowshroom_wood_floor.asItem() && state.getBlock() == ExtendedMushroomsCompat.glowshroom_wood_floor_stair)||
+					(item.getItem() == ExtendedMushroomsCompat.mushroom_wood_floor.asItem() && state.getBlock() == ExtendedMushroomsCompat.mushroom_wood_floor_stair)||
+					(item.getItem() == ExtendedMushroomsCompat.poisonous_mushroom_wood_floor.asItem() && state.getBlock() == ExtendedMushroomsCompat.poisonous_mushroom_wood_floor_stair))
+				return true;
+		}
 		
 		return false;
 	}
