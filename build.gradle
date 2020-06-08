@@ -16,15 +16,14 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 
-version = '1.15.2_v1.4.3'
+version = '1.15.2_v1.4.5'
 group = 'com.endlesnights.carpetstairsmod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'carpetstairsmod'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-    mappings channel: 'snapshot', version: '20200225-1.15.1'
-	
+    mappings channel: 'snapshot', version: '20200514-1.15.1'
     runs {
         client {
             workingDirectory project.file('run')
@@ -52,7 +51,8 @@ minecraft {
 
 dependencies {
 
-    minecraft 'net.minecraftforge:forge:1.15.2-31.1.24'
+    minecraft 'net.minecraftforge:forge:1.15.2-31.2.0'
+
 	compile "curse.maven:extendedmushrooms:2932491"
 
 }
@@ -62,7 +62,7 @@ jar {
         attributes([
             "Specification-Title": "carpetstairsmod",
             "Specification-Vendor": "EndlesNights",
-            "Specification-Version": "v1.4.3", // We are version 1 of ourselves
+            "Specification-Version": "v1.4.5", // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
             "Implementation-Vendor" :"EndlesNights",

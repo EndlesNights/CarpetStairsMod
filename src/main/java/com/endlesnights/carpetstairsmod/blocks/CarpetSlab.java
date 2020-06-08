@@ -26,7 +26,7 @@ public class CarpetSlab extends CarpetBlock
 	
 	public CarpetSlab(Block parentBlock, DyeColor color, Block.Properties properties)
 	{
-		super(color, properties);
+		super(color, properties.notSolid());
 		this.parrentBlock = parentBlock;
 	}
 	

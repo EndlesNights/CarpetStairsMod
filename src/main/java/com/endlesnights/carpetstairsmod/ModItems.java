@@ -30,12 +30,24 @@ public class ModItems
         
 		if(ModList.get().isLoaded("extendedmushrooms"))
 		{
-	        event.getRegistry().registerAll
-	        (
-        		createItemBlockForBlock(ExtendedMushroomsCompat.glowshroom_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab)),
-        		createItemBlockForBlock(ExtendedMushroomsCompat.mushroom_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab)),
-        		createItemBlockForBlock(ExtendedMushroomsCompat.poisonous_mushroom_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab))
-			);
+			try
+			{
+		        event.getRegistry().registerAll
+		        (
+	        		createItemBlockForBlock(ExtendedMushroomsCompat.glowshroom_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab)),
+	        		createItemBlockForBlock(ExtendedMushroomsCompat.mushroom_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab)),
+	        		createItemBlockForBlock(ExtendedMushroomsCompat.poisonous_mushroom_wood_floor, new Item.Properties().group(CarpetStairsMod.instance.creativeTab))
+				);
+			}
+			catch(Error e)
+			{
+				System.out.println("Error while attpeing to load compatibility with CarpetStairs & ExtendedMushroomsBlocks. Skipping Block:" + e.getMessage());
+			}
+			catch(Exception e)
+			{
+				System.out.println("Error while attpeing to load compatibility with CarpetStairs & ExtendedMushroomsBlocks. Skipping Block:" + e.getMessage());
+			}
+
 		}
     }
     

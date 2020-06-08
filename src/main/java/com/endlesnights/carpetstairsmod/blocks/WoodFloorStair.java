@@ -2,8 +2,6 @@ package com.endlesnights.carpetstairsmod.blocks;
 
 import java.util.stream.IntStream;
 
-import com.endlesnights.carpetstairsmod.ModBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
