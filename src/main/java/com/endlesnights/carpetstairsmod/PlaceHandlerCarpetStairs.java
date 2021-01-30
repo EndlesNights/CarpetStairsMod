@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import com.endlesnights.carpetstairsmod.blocks.BlockCarpetStair;
 
-import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
+//import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.StairsBlock;
@@ -115,14 +115,14 @@ private static final HashMap<ResourceLocation,Block> PLACE_ENTRIES = new HashMap
 				)
 			return true;
 		
-		if(ModList.get().isLoaded("extendedmushrooms"))
-		{
-			if(	(item.getItem() == ExtendedMushroomsBlocks.BROWN_MUSHROOM_CARPET.asItem() && state.getBlock() == ExtendedMushroomsCompat.brown_mushroom_carpet_stair)||
-					(item.getItem() == ExtendedMushroomsBlocks.GLOWSHROOM_CAP_CARPET.asItem() && state.getBlock() == ExtendedMushroomsCompat.glowshroom_carpet_stair)||
-					(item.getItem() == ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP_CARPET.asItem() && state.getBlock() == ExtendedMushroomsCompat.poisonous_mushroom_carpet_stair)||
-					(item.getItem() == ExtendedMushroomsBlocks.RED_MUSHROOM_CARPET.asItem() && state.getBlock() == ExtendedMushroomsCompat.red_mushroom_carpet_stair))
-				return true;
-		}
+//		if(ModList.get().isLoaded("extendedmushrooms"))
+//		{
+//			if(	(item.getItem() == ExtendedMushroomsBlocks.BROWN_MUSHROOM_CARPET.asItem() && state.getBlock() == ExtendedMushroomsCompat.brown_mushroom_carpet_stair)||
+//					(item.getItem() == ExtendedMushroomsBlocks.GLOWSHROOM_CAP_CARPET.asItem() && state.getBlock() == ExtendedMushroomsCompat.glowshroom_carpet_stair)||
+//					(item.getItem() == ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP_CARPET.asItem() && state.getBlock() == ExtendedMushroomsCompat.poisonous_mushroom_carpet_stair)||
+//					(item.getItem() == ExtendedMushroomsBlocks.RED_MUSHROOM_CARPET.asItem() && state.getBlock() == ExtendedMushroomsCompat.red_mushroom_carpet_stair))
+//				return true;
+//		}
 		
 		return false;
 	}

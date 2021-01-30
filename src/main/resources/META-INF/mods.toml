@@ -1,8 +1,9 @@
 modLoader="javafml" #mandatory
-loaderVersion="[31,)" #mandatory
+loaderVersion="[34,)" #mandatory
+license="AGPL-3.0"
 [[mods]] #mandatory
 modId="carpetstairsmod" #mandatory
-version="1.4.5" #mandatory
+version="1.4.7" #mandatory
 displayName="Carpet Stairs Mod" #mandatory 
 displayURL="https://www.curseforge.com/minecraft/mc-mods/carpet-stairs-mod" #optional
 

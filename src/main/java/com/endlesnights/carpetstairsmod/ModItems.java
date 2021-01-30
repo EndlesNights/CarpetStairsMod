@@ -41,7 +41,7 @@ public class ModItems
 			}
 			catch(Error e)
 			{
-				System.out.println("Error while attpeing to load compatibility with CarpetStairs & ExtendedMushroomsBlocks. Skipping Block:" + e.getMessage());
+				System.out.println("Error while attpeing to load compatibility with CarpetStairs & ExtendedMushroomsBlocks. Skipping Block:");
 			}
 			catch(Exception e)
 			{
